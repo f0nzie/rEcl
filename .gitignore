@@ -8,3 +8,5 @@ inst/python/read_vectors\.log
 inst/python/pyres/read_vectors\.log
 
 inst/python/\.idea/
+
+*.html
