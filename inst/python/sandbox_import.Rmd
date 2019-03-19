@@ -1,0 +1,78 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(reticulate)
+
+py_config()
+reticulate::py_available()
+```
+
+```{r}
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+```{python}
+import pyres
+
+unsmry_parser = pyres.EclBinaryParser('VOLVE_2016.UNSMRY')
+
+# AttributeError: module 'pyres' has no attribute 'EclBinaryParser'
+```
+
+```{python}
+from . import pyres
+
+pyres.EclBinaryParser('abc')
+```
+
+```{python}
+import pyres.binary_parser
+# print('debug=%s' % pyres.debug)
+
+# ModuleNotFoundError: No module named 'postprocess'
+```
+
+
+```{r}
+library(reticulate)
+
+pyres <- import('pyres')
+# doesn't work+
+```
+
+```{r}
+getwd()
+```
+
+
+
+```{python}
+
+```
+
+```{r}
+# get the full filename of the Eclipse binary file
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+```{python}
+import sys
+sys.path.append("R:/github-oilgains/rEcl/inst/python/pyres")
+sys.path
+```
+
+```{python}
+import pyres.binary_parser as bp
+
+unsmry_parser = bp.EclBinaryParser(r.unsmry_file)
+unsmry_parser.get_dimens()
+```
+
+
