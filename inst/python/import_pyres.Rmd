@@ -1,0 +1,40 @@
+---
+title: "import pyres"
+output: html_notebook
+---
+
+
+```{r}
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+
+```{r}
+# get the full filename of the Eclipse binary file
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+```{python}
+# add module to system path
+# this will enable Python to find pyres sub-modules
+import sys
+sys.path.append("R:/github-oilgains/rEcl/inst/python/pyres")
+sys.path
+```
+
+```{python}
+import pyres.binary_parser as bp
+
+unsmry_parser = bp.EclBinaryParser(r.unsmry_file)
+unsmry_parser.get_dimens()
+```
+
+
+```{python}
+unsmry_vectors = unsmry_parser.read_vectors()
+unsmry_vectors[["FOPR"]]
+```
+
