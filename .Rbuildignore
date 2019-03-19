@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+notebooks
+inst/python/venv
+inst/python/tests
+inst/python/volve
+inst/python/.idea
