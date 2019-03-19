@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+
+inst/python/read_vectors\.log
