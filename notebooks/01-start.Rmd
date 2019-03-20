@@ -1,0 +1,47 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(reticulate)
+
+py_config()
+reticulate::py_available()
+```
+
+```{r}
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+```{r}
+# library(reticulate)
+# proj_root <- rprojroot::find_rstudio_root_file()
+# python_inter <- file.path(proj_root, "inst/python/venv/Scripts")
+# reticulate::use_python(python_inter, required = TRUE)
+# reticulate::py_available()
+```
+
+```{r}
+# library(reticulate)
+# proj_root <- rprojroot::find_rstudio_root_file()
+# # proj_root
+# reticulate::use_virtualenv(file.path(proj_root, "inst/python/venv/Scripts"), 
+#                            required = TRUE)
+# reticulate::py_available()
+# py_config()
+```
+
+
+```{python}
+a = 10
+print(a)
+```
+
+```{r}
+source_python("../inst/python/pyres/binary_parser.py")
+```
+
+

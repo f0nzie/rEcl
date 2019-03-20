@@ -12,3 +12,5 @@ inst/python/\.idea/
 *.html
 
 *.pyc
+
+*.log
