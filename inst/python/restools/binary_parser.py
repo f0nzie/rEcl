@@ -237,7 +237,7 @@ class EclBinaryParser(object):
         if date not in seqnum_dates['DATETIME']:
             raise ValueError('There is no {} date among available restart dates'.format(date))
         seqnum = seqnum_dates[seqnum_dates['DATETIME']==date].index[0]
-        if prop in static_props:
+        if prop in postprocess.static_props:
             df = pd.DataFrame(self._get_static_pointers())
             ext = '.INIT'
         else:
