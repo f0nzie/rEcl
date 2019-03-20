@@ -1,0 +1,40 @@
+---
+title: "rrestools"
+output: html_notebook
+---
+
+
+```{r}
+library(rEcl)
+```
+
+```{r}
+rtc <- restools_connect()
+```
+
+```{r}
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+
+```{r}
+unsmry_parser <- rtc$py_link$binary_parser$EclBinaryParser(unsmry_file)
+```
+
+```{r}
+unsmry_parser$get_dimens()
+```
+
+
+```{r}
+struc <- read_eclipse(rtc, unsmry_file)
+```
+
+
+```{r}
+parser <- struc$model
+parser$get_dimens()
+```
+
