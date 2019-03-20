@@ -21,20 +21,15 @@ file.exists(unsmry_file)
 
 ```{r}
 unsmry_parser <- rtc$py_link$binary_parser$EclBinaryParser(unsmry_file)
-```
-
-```{r}
 unsmry_parser$get_dimens()
 ```
 
 
 ```{r}
 struc <- read_eclipse(rtc, unsmry_file)
-```
-
-
-```{r}
 parser <- struc$model
 parser$get_dimens()
 ```
+
+
 
