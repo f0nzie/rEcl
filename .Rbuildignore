@@ -6,3 +6,4 @@ inst/python/venv
 inst/python/tests
 inst/python/volve
 inst/python/.idea
+^.*\.log$
