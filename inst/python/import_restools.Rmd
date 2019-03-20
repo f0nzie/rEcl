@@ -1,0 +1,51 @@
+---
+title: "import_restools"
+output: html_notebook
+---
+
+
+```{r}
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+
+# get the full filename of the Eclipse binary file
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+
+
+```{python}
+# this works if 
+
+import restools.binary_parser as bp
+
+parser = bp.EclBinaryParser(r.unsmry_file)
+parser.get_dimens()
+```
+
+
+```{python}
+# this works and is equivalent to the previous chunk
+
+import restools as rt
+
+parser = rt.binary_parser.EclBinaryParser(r.unsmry_file)
+parser.get_dimens()
+parser.get_actnum()
+parser.is_dual()
+
+
+seqnum_dates = parser.get_seqnum_dates()
+unsmry_vectors = parser.read_vectors()
+shape_unsmry_vectors = unsmry_vectors.shape
+```
+
+```{r}
+library(reticulate)
+
+py$seqnum_dates
+unlist(py$shape_unsmry_vectors)
+```
+
