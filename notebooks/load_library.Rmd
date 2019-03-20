@@ -6,9 +6,7 @@ output: html_notebook
 
 ```{r}
 library(rEcl)
-```
 
-```{r}
 rtc <- restools_connect()
 ```
 
@@ -30,6 +28,7 @@ struc <- read_eclipse(rtc, unsmry_file)
 parser <- struc$model
 parser$get_dimens()
 ```
+
 
 
 
