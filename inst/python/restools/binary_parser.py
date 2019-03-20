@@ -250,8 +250,8 @@ class EclBinaryParser(object):
             # Map values from INIT/UNRST to actnum array,
             # filling inactive cells with NaN's
             temp_array = self.get_actnum()
-            temp_array[temp_array==0] = np.nan
-            temp_array[temp_array>0] = prop_array
+            temp_array[temp_array == 0] = np.nan
+            temp_array[temp_array > 0] = prop_array
             # Reshape values array to Eclipse grid dimensions
             # Order of coordinates is reversed because
             # Eclipse counts first by I, then by J, then by K
