@@ -1,0 +1,48 @@
+---
+title: "test fibo.py"
+output: html_notebook
+---
+
+
+```{r}
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+```{python}
+import fibo
+```
+
+
+```{python}
+fibo.fib(1000)
+fibo.fib2(100)
+```
+
+### import names from a module
+
+```{python}
+from fibo import fib, fib2
+
+fib(500)
+```
+
+### import all names
+
+```{python}
+from fibo import *
+fib(500)
+```
+
+### module name followed by as
+
+```{python}
+import fibo as fib
+fib.fib(500)
+```
+
+```{python}
+from fibo import fib as fibonacci
+fibonacci(500)
+```
+
