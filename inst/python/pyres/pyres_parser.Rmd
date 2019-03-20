@@ -1,0 +1,123 @@
+---
+title: "pyres parser"
+output: html_notebook
+---
+
+
+```{r}
+library(reticulate)
+
+py_config()
+reticulate::py_available()
+```
+
+```{r}
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+```{r}
+library(reticulate)
+source_python("binary_parser.py")
+
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+```{python}
+r.unsmry_file
+unsmry_parser = EclBinaryParser(r.unsmry_file)
+unsmry_parser.get_dimens()
+```
+
+```{python}
+unsmry_vectors =  unsmry_parser.read_vectors()
+unsmry_cols = unsmry_vectors.columns
+unsmry_cols_list = unsmry_cols.tolist()
+```
+
+```{r}
+unsmry_cols_unl <- unlist(py$unsmry_cols_list)
+
+in_unsmry_cols_idx <- which(unsmry_cols_unl %in% "SM3/DAY")
+head(in_unsmry_cols_idx)
+```
+
+
+
+```{r}
+# remove the units
+units <- c("SM3/DAY", "KG/M3", "SM3/SM3", "SM3", "SM3/D/B", "RM3/DAY", "RM3", 
+           "BARSA")
+notin_unsmry_cols_idx <- which(!unsmry_cols_unl %in% units)
+head(notin_unsmry_cols_idx)
+```
+
+```{r}
+# unique columns
+unique_cols <- unique(unsmry_cols[notin_unsmry_cols_idx])
+unique_cols[1:100]
+```
+
+```{r}
+# only those alphabetic keywords
+grep(pattern = "[A-Z]", unique_cols,value = TRUE, perl = TRUE)
+```
+
+```{python}
+unsmry_vectors.FOPRS
+```
+
+```{python}
+df = unsmry_vectors
+
+```
+
+```{python}
+type(df)
+df.head(10)
+```
+
+```{python}
+index_names = df.index.names
+index_names
+```
+
+```{python}
+df.index.get_level_values(0)
+df.index.nlevels
+```
+
+```{python}
+df[["FOPR"]].columns.to_numpy()
+```
+
+```{python}
+df[['FOPR', 'FWPR']].columns.get_level_values(0)
+df[['FOPR', 'FWPR']].columns.get_level_values(1)
+df[['FOPR', 'FWPR']].columns.get_level_values(2)
+df[['FOPR', 'FWPR']].columns.get_level_values(3)
+```
+
+```{python}
+# get the columns at level 0
+vectors_columns_l0 = df.columns.get_level_values(0)
+vectors_columns_l0_list = vectors_columns_l0.to_list()
+```
+
+```{r}
+vectors_columns_l0u <- unique(py$vectors_columns_l0_list)
+vectors_columns_l0u
+```
+
+```{r}
+# field vectors
+vectors_columns_l0u[startsWith(vectors_columns_l0u, "F")]
+```
+
+
+```{r}
+# grep(pattern = "[^A-Z]", unique_cols,value = TRUE, perl = TRUE)
+```
+
