@@ -57,15 +57,15 @@ restools_connect <- function (){
 
 
 #' @export
-read_eclipse <- function(o, file){
+EclBinaryParser <- function(o, file){
     if(o$connected == F || is.null(o))
         stop("Error, no connection made. Need to call pysd_connect() befoe read_vensim()")
-    UseMethod("read_eclipse")
+    UseMethod("EclBinaryParser")
 }
 
 
 #' @export
-read_eclipse.pyrestools <- function(o, file){
+EclBinaryParser.pyrestools <- function(o, file){
     tryCatch(
         {m <- o$py_link$binary_parser$EclBinaryParser(file)
         o$loaded_model <- TRUE
