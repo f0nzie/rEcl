@@ -80,3 +80,47 @@ EclBinaryParser.pyrestools <- function(o, file){
         finally={
         })
 }
+
+
+#' @export
+get_dimensions <- function(p) {
+    p$model$get_dimens()
+
+}
+
+#' @export
+get_actnum <- function(p) {
+    p$model$get_actnum()
+
+}
+
+#' @export
+get_seqnum_dates <- function(p) {
+    p$model$get_seqnum_dates()
+
+}
+
+
+#' @export
+is_dual <- function(p) {
+    p$model$is_dual()
+
+}
+
+#' @export
+read_vectors <- function(p) {
+    p$model$read_vectors()
+}
+
+
+
+
+show_field_vectors <- function(p) {
+    vectors <- p$model$read_vectors()
+    # get the columns at level 0
+    vectors_columns_l0 = vectors$columns$get_level_values(0)
+    vectors_columns_l0_list = vectors_columns_l0$to_list()
+    vectors_columns_l0u <- unique(py$vectors_columns_l0_list)
+    # field vectors
+    vectors_columns_l0u[startsWith(vectors_columns_l0u, "F")]
+}
