@@ -10,6 +10,7 @@ import warnings
 
 
 # This is for running in a notebook with %run magic
+# from postprocess import ecl_vectors
 from . import postprocess
 
 
