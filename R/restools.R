@@ -13,9 +13,6 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-hello <- function() {
-  print("Hello, world!")
-}
 
 check_python_version <- function(){
     #packageStartupMessage("Checking for the python version...")
