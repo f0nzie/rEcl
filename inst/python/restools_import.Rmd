@@ -1,0 +1,273 @@
+---
+title: "pyres parser"
+output: html_notebook
+---
+
+
+```{r}
+library(reticulate)
+
+py_config()
+
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+```{r}
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+
+```{python}
+# this works
+import restools.binary_parser as bp
+
+parser = bp.EclBinaryParser(r.unsmry_file)
+parser.get_dimens()
+```
+
+```{python}
+vectors = parser.read_vectors()
+```
+
+
+## New functions
+
+```{python}
+parser.get_vectors_shape()
+```
+
+```{python}
+parser.get_vector_names()
+```
+
+```{python}
+fopr = parser.get_vector_column("FOPR")
+fopr
+```
+
+
+```{r}
+# get the object from Python and show it as an R dataframe
+py$fopr
+```
+
+```{r}
+# vectorizing the function
+cols <- c("FOPR", "FOPT", "FPR")
+
+df <- sapply(cols, py$parser$get_vector_column, USE.NAMES = FALSE)
+do.call(data.frame, df)
+```
+
+
+
+## Other functions
+
+```{python}
+# active blocks
+len(parser.get_actnum()[parser.get_actnum().mask==False])
+```
+
+```{python}
+parser.get_seqnum_dates()
+```
+
+
+```{python}
+vectors =  parser.read_vectors()
+
+df = vectors
+headers = df.columns
+```
+
+```{python}
+vectors['CWFR']['P-F-14']['(65, 48, 11)'].loc[550:568]
+```
+
+```{python}
+'TIME' in vectors.columns.levels[0]
+```
+
+```{python}
+vectors[vectors['TIME'][':+:+:+:+']['-32767']['DAYS']<1000]['TIME']
+```
+
+```{python}
+len(vectors)
+```
+
+```{python}
+vectors['FOPT']
+```
+
+```{python}
+vectors[['FWIT', 'FWPT']]
+```
+
+```{python}
+fopr_dict = vectors[["FOPR"]].to_dict()
+keys = fopr_dict.keys()
+values = fopr_dict.values()
+```
+
+```{python}
+keys
+```
+
+
+```{python}
+list(keys)
+```
+
+```{python}
+# this will not work
+fopr_dict[("FOPR")]
+
+# KeyError: 'FOPR'
+```
+
+
+```{python}
+# it will work because we are specifying the whole key
+# where the key is: "FOPR", "FIELD", "0", "SM3/DAY"
+
+fopr_dict["FOPR", "FIELD", "0", "SM3/DAY"]
+```
+
+
+```{python}
+list(values)
+```
+
+
+```{python}
+d = fopr_dict
+{names[i]:value for i,value in enumerate(d.values())}
+```
+
+
+
+```{python}
+fopr_values = vectors[["FOPR"]].to_dict().values()
+fopr_values
+```
+
+```{python}
+type(fopr_values)
+
+# these do not work
+# fopr_values[1]
+# fopr_values["1"]
+# fopr_values[[1]]
+# fopr_values[["1"]]
+
+# dictionary values
+list(fopr_values)
+```
+
+```{python}
+d = fopr
+{names[i]:value for i,value in enumerate(d.values())}
+```
+
+```{python}
+for i, value in enumerate(fopr_values):
+    print(value)
+```
+
+
+```{python}
+v = list(fopr_values)
+{names[i]:v[i] for i in range(len(names))}
+```
+
+
+```{python}
+for item in fopr_values:
+    print(item)
+```
+
+
+
+
+```{python}
+list(vectors[['FWCT', 'FWCTH']].to_dict().values())[0]
+```
+
+
+```{python}
+from collections import defaultdict
+
+d_units = defaultdict(set)
+d_wgnames = defaultdict(set)
+d_nums = defaultdict(set)
+for k, wg, n, u in headers:
+    d_units[k].add(u)
+    d_wgnames[k].add(wg)
+    d_nums[k].add(n)
+```
+
+
+```{python}
+d_wgnames = dict(defaultdict(list, ((k, sorted(list(v))) for k, v in d_wgnames.items())))
+d_nums = dict(defaultdict(list, ((k, sorted(list(v))) for k, v in d_nums.items())))
+d_units = dict(defaultdict(list, ((k, sorted(list(v))) for k, v in d_units.items())))
+
+d_wgnames.keys()
+```
+
+```{python}
+d_wgnames['FOPR']
+
+d_nums['FOPR']
+```
+
+
+```{python}
+vectors.columns.levels[0]
+```
+
+
+```{python}
+
+cols = vectors.columns
+cols_list = cols.tolist()
+foprs =vectors.FOPRS
+foprs
+```
+
+
+## R code
+
+
+```{r}
+unsmry_cols_unl <- unlist(py$unsmry_cols_list)
+
+in_unsmry_cols_idx <- which(unsmry_cols_unl %in% "SM3/DAY")
+head(in_unsmry_cols_idx)
+```
+
+
+
+```{r}
+# remove the units
+units <- c("SM3/DAY", "KG/M3", "SM3/SM3", "SM3", "SM3/D/B", "RM3/DAY", "RM3", 
+           "BARSA")
+notin_unsmry_cols_idx <- which(!unsmry_cols_unl %in% units)
+head(notin_unsmry_cols_idx)
+```
+
+```{r}
+# unique columns
+unique_cols <- unique(unsmry_cols_unl[notin_unsmry_cols_idx])
+unique_cols[1:100]
+```
+
+```{r}
+# only those alphabetic keywords
+grep(pattern = "[A-Z]", unique_cols,value = TRUE, perl = TRUE)
+```
+
