@@ -1,0 +1,61 @@
+---
+title: "restools with R functions"
+output: html_notebook
+---
+
+
+```{r}
+library(rEcl)
+
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+```{r}
+py <- restools_connect()
+parser <- EclBinaryParser(py, unsmry_file)
+parser
+```
+
+
+
+
+```{r}
+get_dimensions(parser)
+```
+
+```{r}
+actnum <- get_actnum(parser)
+head(actnum,50)
+```
+
+
+```{r}
+get_seqnum_dates(parser)
+```
+
+
+```{r}
+vectors <- read_vectors(parser)
+```
+
+
+## new functions
+
+```{r}
+# new function implemented in Python class
+parser$model$get_vectors_shape()
+```
+
+```{r}
+# new function
+parser$model$get_vector_names()
+```
+
+
+
+
+
+
+
