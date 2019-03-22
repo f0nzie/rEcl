@@ -1,17 +1,3 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
 
 
 check_python_version <- function(){
@@ -40,6 +26,8 @@ check_restools_present <- function() {
 }
 
 
+#' Connect to Python and the package restools
+#'
 #' @export
 restools_connect <- function (){
     check_python_version()
@@ -56,6 +44,14 @@ restools_connect <- function (){
 }
 
 
+#' Call to Python class to convert Eclipse binary files
+#'
+#' Uses a Python package under restools to make the convertion from Eclipse
+#' binary files to dataframes
+#'
+#' @param o object
+#' @param file the name of a Eclipse binary file
+#'
 #' @export
 EclBinaryParser <- function(o, file){
     if(o$connected == F || is.null(o))
@@ -63,7 +59,10 @@ EclBinaryParser <- function(o, file){
     UseMethod("EclBinaryParser")
 }
 
-
+#' This is a S3 method for EclBinaryParser
+#'
+#' @param o object
+#' @param file the name of a Eclipse binary file
 #' @export
 EclBinaryParser.pyrestools <- function(o, file){
     tryCatch(
@@ -81,19 +80,28 @@ EclBinaryParser.pyrestools <- function(o, file){
         })
 }
 
-
+#' Get the dimensions of the main dataframe read from Eclipse binary file
+#'
+#' @param p parser object
 #' @export
 get_dimensions <- function(p) {
     p$model$get_dimens()
 
 }
 
+#' Get the activated cells from the reservoir model
+#'
+#' @param p parser object
 #' @export
+#'
 get_actnum <- function(p) {
     p$model$get_actnum()
 
 }
 
+#' Get the seqnum sequential dates
+#'
+#' @param p parser object
 #' @export
 get_seqnum_dates <- function(p) {
     p$model$get_seqnum_dates()
@@ -101,30 +109,46 @@ get_seqnum_dates <- function(p) {
 }
 
 
+#' Ask if the model is dual
+#'
+#' @param p parser object
 #' @export
 is_dual <- function(p) {
     p$model$is_dual()
 
 }
 
+#' Read the vectors from the main dataframe
+#'
+#' @param p parser object
 #' @export
 read_vectors <- function(p) {
     p$model$read_vectors()
 }
 
+#' Get the shape or dimensions of the vectors dataframe
+#'
+#' @param p parser object
 #' @export
 get_vectors_shape <- function(p) {
     unl_shape <- unlist(p$model$get_vectors_shape())
     c(unl_shape[1], unl_shape[2])
 }
 
-
+#' Get all the names for the vectors extracted from the main dataframe
+#'
+#' @param p parser object
 #' @export
 get_vector_names <- function(p) {
     p$model$get_vector_names()
 }
 
-
+#' Get a column or several columns from the main dataframe
+#'
+#' This function has been vectorized to read multiple columns
+#'
+#' @param p parser object
+#' @param cols character vectors with names of the columns
 #' @export
 get_vector_column <- function(p, cols) {
     f <- function(x) {
@@ -136,12 +160,12 @@ get_vector_column <- function(p, cols) {
 }
 
 
-show_field_vectors <- function(p) {
-    vectors <- p$model$read_vectors()
-    # get the columns at level 0
-    vectors_columns_l0 = vectors$columns$get_level_values(0)
-    vectors_columns_l0_list = vectors_columns_l0$to_list()
-    vectors_columns_l0u <- unique(py$vectors_columns_l0_list)
-    # field vectors
-    vectors_columns_l0u[startsWith(vectors_columns_l0u, "F")]
-}
+# show_field_vectors <- function(p) {
+#     vectors <- p$model$read_vectors()
+#     # get the columns at level 0
+#     vectors_columns_l0 = vectors$columns$get_level_values(0)
+#     vectors_columns_l0_list = vectors_columns_l0$to_list()
+#     vectors_columns_l0u <- unique(py$vectors_columns_l0_list)
+#     # field vectors
+#     vectors_columns_l0u[startsWith(vectors_columns_l0u, "F")]
+# }
