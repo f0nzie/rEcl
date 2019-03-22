@@ -138,11 +138,13 @@ class TestReadVectors(TestCase):
         # print(result)
         self.assertEqual(result, 15543996.0)              # cumulative water
 
+        # FWCT: Field Watercut
         fwct_column = self.parser.get_vector_column("FWCT")
         result = fwct_column[0].mean()
         # print(result)
         self.assertAlmostEqual(result, 0.550, places=3)  # average field watercut
 
+        # FPR: Field Average Pressure
         fpr_column = self.parser.get_vector_column("FPR")
         result = fpr_column[0]
         # print(result.max())
