@@ -316,4 +316,40 @@ class EclBinaryParser(object):
                                     names=['Vector', 'Well/Group', 'Cell/Region', 'Units'])
         df = pd.DataFrame(params, columns=headers).sort_index(axis=1)
         df.index.name = 'MINISTEP'
+        self.vectors_df = df
         return df
+
+    def get_vectors_shape(self):
+        if self.vectors_df is not None:
+            return self.vectors_df.shape
+        else:
+            return None
+
+    def get_vector_names(self):
+        if self.vectors_df is not None:
+            return sorted(set(self.vectors_df.columns.get_level_values(0)))
+        else:
+            return None
+
+    def get_vector_column(self, vector_name):
+        if self.vectors_df is not None:
+            vector = self.vectors_df[[vector_name]]  # get a vector
+            vector_us = vector.unstack()  # unstack the multi index df
+            vector_us_ri = vector_us.reset_index()  # reset the index
+            ser = vector_us_ri[0]    # extract first column. it's a series
+            # blank_index = [''] * len(ser)
+            # ser.index = blank_index
+            ser.reset_index(drop=True, inplace=True)
+            ser.name = vector_name
+            return pd.DataFrame(ser)  # convert to dataframe
+
+
+def is_valid_vector(vector_name):
+    valid_vectors = postprocess.ecl_vectors.ecl_vectors
+    return vector_name in valid_vectors
+
+
+
+
+
+
