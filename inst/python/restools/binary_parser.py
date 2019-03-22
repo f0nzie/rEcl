@@ -119,11 +119,12 @@ class EclBinaryParser(object):
     """""
 
     def __init__(self, filename):
+        self.vectors_df = None   # this will take the shape of the vectors
         """
         Truncates file extension if filename is provided with one
         """
         if (isinstance(os.path.splitext(filename), tuple) and
-            os.path.splitext(filename)[1] in ecl_extensions):
+                os.path.splitext(filename)[1] in ecl_extensions):
             self.filename = os.path.splitext(filename)[0]
         else:
             self.filename = filename
