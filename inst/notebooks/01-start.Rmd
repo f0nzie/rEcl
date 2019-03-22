@@ -12,8 +12,16 @@ reticulate::py_available()
 ```
 
 ```{r}
+conda_list()
+```
+
+
+```{r}
+# select environment pyres
 reticulate::use_condaenv("pyres", required = TRUE)
 reticulate::py_config()
+py_run_string('import pandas')
+py_run_string('import numpy')
 ```
 
 ```{r}
@@ -36,12 +44,17 @@ reticulate::py_config()
 
 
 ```{python}
+# the simplest of examples
 a = 10
 print(a)
 ```
 
 ```{r}
-source_python("../inst/python/pyres/binary_parser.py")
+source_python("../python/pyres/binary_parser.py")
+```
+
+```{r}
+getwd()
 ```
 
 
