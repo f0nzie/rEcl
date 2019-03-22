@@ -41,7 +41,40 @@ vectors <- read_vectors(parser)
 ```
 
 
-## new functions
+## new functions in R
+
+```{r}
+get_vectors_shape(parser)
+```
+
+```{r}
+get_vector_names(parser)
+```
+
+```{r}
+get_vector_column(parser, "FOPR")
+```
+
+```{r}
+# get several vectors at once
+df_wat <- get_vector_column(parser, c("FWPR", "FWPT", "FWIT"))
+class(df_wat)
+```
+
+```{r}
+# get the last 6 rows
+tail(df_wat, 6)
+```
+
+```{r}
+# get several vectors at once
+df_oil <- get_vector_column(parser, c("FOPR", "FOPT", "FOPTH"))
+tail(df_oil, 20)
+```
+
+
+
+## new functions in Python
 
 ```{r}
 # new function implemented in Python class

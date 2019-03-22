@@ -112,7 +112,28 @@ read_vectors <- function(p) {
     p$model$read_vectors()
 }
 
+#' @export
+get_vectors_shape <- function(p) {
+    unl_shape <- unlist(p$model$get_vectors_shape())
+    c(unl_shape[1], unl_shape[2])
+}
 
+
+#' @export
+get_vector_names <- function(p) {
+    p$model$get_vector_names()
+}
+
+
+#' @export
+get_vector_column <- function(p, cols) {
+    f <- function(x) {
+        p$model$get_vector_column(x)
+    }
+
+    df <- sapply(cols, f, USE.NAMES = FALSE)
+    do.call(data.frame, df)
+}
 
 
 show_field_vectors <- function(p) {
