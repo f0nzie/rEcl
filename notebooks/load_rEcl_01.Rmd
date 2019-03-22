@@ -53,7 +53,17 @@ parser$model$get_vectors_shape()
 parser$model$get_vector_names()
 ```
 
+```{r}
+parser$model$get_vector_column("FOPR")
+```
 
+```{r}
+# vectorizing the function
+cols <- c("FOPR", "FOPT", "FPR")
+
+df <- sapply(cols, parser$model$get_vector_column, USE.NAMES = FALSE)
+do.call(data.frame, df)
+```
 
 
 
