@@ -29,6 +29,11 @@ check_restools_present <- function() {
 #' Connect to Python and the package restools
 #'
 #' @export
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' }
 restools_connect <- function (){
     check_python_version()
     restools <- check_restools_present()
@@ -53,16 +58,19 @@ restools_connect <- function (){
 #' @param file the name of a Eclipse binary file
 #'
 #' @export
+#' @examples
+#' \dontrun{
+#' ecl_folder <- system.file("rawdata", package = "rEcl")
+#' unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3.UNSMRY")
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' }
 EclBinaryParser <- function(o, file){
     if(o$connected == F || is.null(o))
         stop("Error, no connection made. Need to call pysd_connect() befoe read_vensim()")
     UseMethod("EclBinaryParser")
 }
 
-#' This is a S3 method for EclBinaryParser
-#'
-#' @param o object
-#' @param file the name of a Eclipse binary file
 #' @export
 EclBinaryParser.pyrestools <- function(o, file){
     tryCatch(
@@ -84,6 +92,12 @@ EclBinaryParser.pyrestools <- function(o, file){
 #'
 #' @param p parser object
 #' @export
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' get_dimensions(parser)
+#' }
 get_dimensions <- function(p) {
     p$model$get_dimens()
 
@@ -93,7 +107,12 @@ get_dimensions <- function(p) {
 #'
 #' @param p parser object
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' get_actnum(parser)
+#' }
 get_actnum <- function(p) {
     p$model$get_actnum()
 
@@ -103,16 +122,28 @@ get_actnum <- function(p) {
 #'
 #' @param p parser object
 #' @export
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' get_seqnum_dates(parser)
+#' }
 get_seqnum_dates <- function(p) {
     p$model$get_seqnum_dates()
 
 }
 
 
-#' Ask if the model is dual
+#' Ask if the model is of dual porosity
 #'
 #' @param p parser object
 #' @export
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' is_dual(parser)
+#' }
 is_dual <- function(p) {
     p$model$is_dual()
 
@@ -122,6 +153,14 @@ is_dual <- function(p) {
 #'
 #' @param p parser object
 #' @export
+#' @examples
+#' \dontrun{
+#' ecl_folder <- system.file("rawdata", package = "rEcl")
+#' unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3.UNSMRY")
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' read_vectors(parser)
+#' }
 read_vectors <- function(p) {
     p$model$read_vectors()
 }
@@ -130,6 +169,12 @@ read_vectors <- function(p) {
 #'
 #' @param p parser object
 #' @export
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' get_vectors_shape(parser)
+#' }
 get_vectors_shape <- function(p) {
     unl_shape <- unlist(p$model$get_vectors_shape())
     c(unl_shape[1], unl_shape[2])
@@ -139,9 +184,16 @@ get_vectors_shape <- function(p) {
 #'
 #' @param p parser object
 #' @export
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' get_vectors_shape(parser)
+#' }
 get_vector_names <- function(p) {
     p$model$get_vector_names()
 }
+
 
 #' Get a column or several columns from the main dataframe
 #'
@@ -150,6 +202,14 @@ get_vector_names <- function(p) {
 #' @param p parser object
 #' @param cols character vectors with names of the columns
 #' @export
+#' @examples
+#' \dontrun{
+#' py <- restools_connect()
+#' parser <- EclBinaryParser(py, unsmry_file)
+#' get_vector_column(parser, "FOPR")
+#' # vectorized function to get several vectors at once
+#' df_vars <- get_vector_column(parser, c("YEARS", "FGOR", "FOPR", "FWCT"))
+#' }
 get_vector_column <- function(p, cols) {
     f <- function(x) {
         p$model$get_vector_column(x)
