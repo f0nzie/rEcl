@@ -3,6 +3,16 @@ title: "restools with R functions"
 output: html_notebook
 ---
 
+```{r}
+library(reticulate)
+
+py_config()
+
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+
 
 ```{r}
 library(rEcl)
