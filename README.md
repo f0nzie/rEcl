@@ -58,7 +58,7 @@ are too big for an R package.
 
 ## Examples
 
-### SPE6
+### Example reservoir model SPE6
 
 We start by reading the file `SPE6_FRAC.UNSMRY`. This file , because is
 relatively small, we can include it with the package. We willread it
@@ -69,14 +69,15 @@ library(reticulate)
 
 reticulate::use_condaenv("pyres", required = TRUE)
 reticulate::py_config()
-#> python:         /home/superuser/anaconda3/envs/pyres/bin/python
-#> libpython:      /home/superuser/anaconda3/envs/pyres/lib/libpython3.6m.so
-#> pythonhome:     /home/superuser/anaconda3/envs/pyres:/home/superuser/anaconda3/envs/pyres
-#> version:        3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
-#> numpy:          /home/superuser/anaconda3/envs/pyres/lib/python3.6/site-packages/numpy
+#> python:         C:\Users\msfz751\Anaconda3\envs\pyres\python.exe
+#> libpython:      C:/Users/msfz751/Anaconda3/envs/pyres/python36.dll
+#> pythonhome:     C:\Users\msfz751\ANACON~1\envs\pyres
+#> version:        3.6.8 |Anaconda, Inc.| (default, Feb 21 2019, 18:30:04) [MSC v.1916 64 bit (AMD64)]
+#> Architecture:   64bit
+#> numpy:          C:\Users\msfz751\ANACON~1\envs\pyres\lib\site-packages\numpy
 #> numpy_version:  1.16.2
 #> 
-#> NOTE: Python version was forced by RETICULATE_PYTHON
+#> NOTE: Python version was forced by use_python function
 ```
 
 ``` r
@@ -84,7 +85,7 @@ library(rEcl)
 
 ecl_folder <- system.file("rawdata", package = "rEcl")
 ecl_folder
-#> [1] "/home/superuser/R/x86_64-pc-linux-gnu-library/3.5/rEcl/rawdata"
+#> [1] "C:/Users/msfz751/Documents/R/win-library/3.5/rEcl/rawdata"
 unsmry_file <- file.path(ecl_folder, "spe6", "SPE6_FRAC.UNSMRY")
 file.exists(unsmry_file)
 #> [1] TRUE
@@ -288,7 +289,7 @@ df_vars
 #> 69 2800.146     0.000000   0.0000000
 ```
 
-## Example PUNQ-S3
+## Example reservoir model PUNQ-S3
 
 PUNQ-S3 is a synthetic reservoir model that is used for testing and
 calibrating reservoir simulators.
@@ -298,21 +299,22 @@ library(reticulate)
 
 reticulate::use_condaenv("pyres", required = TRUE)
 reticulate::py_config()
-#> python:         /home/superuser/anaconda3/envs/pyres/bin/python
-#> libpython:      /home/superuser/anaconda3/envs/pyres/lib/libpython3.6m.so
-#> pythonhome:     /home/superuser/anaconda3/envs/pyres:/home/superuser/anaconda3/envs/pyres
-#> version:        3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
-#> numpy:          /home/superuser/anaconda3/envs/pyres/lib/python3.6/site-packages/numpy
+#> python:         C:\Users\msfz751\Anaconda3\envs\pyres\python.exe
+#> libpython:      C:/Users/msfz751/Anaconda3/envs/pyres/python36.dll
+#> pythonhome:     C:\Users\msfz751\ANACON~1\envs\pyres
+#> version:        3.6.8 |Anaconda, Inc.| (default, Feb 21 2019, 18:30:04) [MSC v.1916 64 bit (AMD64)]
+#> Architecture:   64bit
+#> numpy:          C:\Users\msfz751\ANACON~1\envs\pyres\lib\site-packages\numpy
 #> numpy_version:  1.16.2
 #> 
-#> NOTE: Python version was forced by RETICULATE_PYTHON
+#> NOTE: Python version was forced by use_python function
 ```
 
 ``` r
 library(rEcl)
 
 ecl_folder <- system.file("rawdata", package = "rEcl")
-unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3_SIMULATEDREAL.UNSMRY")
+unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3.UNSMRY")
 file.exists(unsmry_file)
 #> [1] TRUE
 ```
@@ -737,5 +739,5 @@ tibble::as_tibble(get_vector_column(parser, "WBHP"))
 #>  8  217.
 #>  9  216.
 #> 10  215.
-#> # … with 1,064 more rows
+#> # ... with 1,064 more rows
 ```

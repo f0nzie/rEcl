@@ -63,7 +63,7 @@ You can find a copy of these files in this repository under `rEcl/inst/python/vo
 
 ## Examples
 
-### SPE6
+### Example reservoir model SPE6
 
 We start by reading the file `SPE6_FRAC.UNSMRY`. This file , because is relatively small, we can include it with the package. We willread it from the package installation folder.
 
@@ -131,7 +131,7 @@ df_vars
 ```
 
 
-## Example PUNQ-S3
+## Example reservoir model PUNQ-S3
 PUNQ-S3 is a synthetic reservoir model that is used for testing and calibrating reservoir simulators.
 
 ```{r}
@@ -145,7 +145,7 @@ reticulate::py_config()
 library(rEcl)
 
 ecl_folder <- system.file("rawdata", package = "rEcl")
-unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3_SIMULATEDREAL.UNSMRY")
+unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3.UNSMRY")
 file.exists(unsmry_file)
 ```
 
