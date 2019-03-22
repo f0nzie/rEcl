@@ -61,5 +61,72 @@ You can find a copy of these files in this repository under `rEcl/inst/python/vo
 
 
 
+## Examples
 
+### SPE6
+
+We start by reading the file `SPE6_FRAC.UNSMRY`. This file , because is relatively small, we can include it with the package. We willread it from the package installation folder.
+
+```{r}
+library(reticulate)
+
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+```{r}
+library(rEcl)
+
+ecl_folder <- system.file("rawdata", package = "rEcl")
+ecl_folder
+unsmry_file <- file.path(ecl_folder, "spe6", "SPE6_FRAC.UNSMRY")
+file.exists(unsmry_file)
+```
+
+We connect to Python and load the class `EclBinaryParser` which resides in the Python package called `restools`. You can take a look at `restools` under the R installation folder in your lcoal disk.
+
+Once we connect and load the Python package, we create an instance of the class `EclBinaryParser` providing the parse object `py` and the full name of the Eclipse binary file.
+
+```{r}
+py <- restools_connect()
+parser <- EclBinaryParser(py, unsmry_file)
+```
+
+First basic task is finding the dimensions of the reservoir model. We do that with `get_dimensions`.
+
+```{r}
+get_dimensions(parser)
+```
+
+This is a heavier operation; reading the vectors.
+
+```{r}
+vectors <- read_vectors(parser)
+```
+
+Get the shape or dimensions of the vector dataframe.
+
+```{r}
+get_vectors_shape(parser)
+```
+
+We get the names of the vectors we specified in our input file.
+
+```{r}
+get_vector_names(parser)
+```
+
+We now want a dataframe corresponding to a specific vector-column with `get_vector_column`:
+
+```{r}
+get_vector_column(parser, "FOPR")
+```
+
+Finally, because the function `get_vector_column` is vectorized, we can get a dataframe of multiple columns.
+
+```{r}
+# get several vectors at once
+df_vars <- get_vector_column(parser, c("FPR", "FGOR", "FOPR"))
+df_vars
+```
 
