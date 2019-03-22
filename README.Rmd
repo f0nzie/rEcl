@@ -130,3 +130,66 @@ df_vars <- get_vector_column(parser, c("FPR", "FGOR", "FOPR"))
 df_vars
 ```
 
+
+## Example PUNQ-S3
+PUNQ-S3 is a synthetic reservoir model that is used for testing and calibrating reservoir simulators.
+
+```{r}
+library(reticulate)
+
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+```{r}
+library(rEcl)
+
+ecl_folder <- system.file("rawdata", package = "rEcl")
+unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3_SIMULATEDREAL.UNSMRY")
+file.exists(unsmry_file)
+```
+
+```{r}
+# connect to Python and start a class instance
+py <- restools_connect()
+parser <- EclBinaryParser(py, unsmry_file)
+```
+
+
+```{r}
+# dimensions of the reservoir model
+get_dimensions(parser)
+```
+
+```{r}
+# reading the Eclipse vectors. this may take few seconds id the reservoir is too complex
+vectors <- read_vectors(parser)
+
+# Get the shape or dimensions of the vector dataframe.
+get_vectors_shape(parser)
+```
+
+```{r}
+# We get the names of the vectors we specified in our input file.
+get_vector_names(parser)
+```
+
+```{r}
+# dataframe corresponding to a specific vector-column
+get_vector_column(parser, "FOPR")
+```
+
+```{r}
+# get a dataframe of multiple columns
+# vectorized function to get several vectors at once
+df_vars <- get_vector_column(parser, c("YEARS", "FGOR", "FOPR", "FWCT"))
+df_vars
+```
+
+Eclipse vectors that are different in nature, such as well (start with __W__) variables, will get a different size than field variables (start with __F__):
+
+```{r}
+# read a well variable
+tibble::as_tibble(get_vector_column(parser, "WBHP"))
+```
+
