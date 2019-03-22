@@ -1,0 +1,19 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+Sys.setenv(RETICULATE_PYTHON = "/home/superuser/anaconda3/envs/pyres/bin/python")
+```
+
+
+```{r}
+library(reticulate)
+
+# select environment pyres
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+py_run_string('import pandas')
+py_run_string('import numpy')
+```
