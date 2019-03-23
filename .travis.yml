@@ -5,3 +5,21 @@ cache: packages
 sudo: false
 warnings_are_errors: true
 r_check_args: --as-cran
+
+
+git:
+  depth: 5
+
+r_packages:
+ - devtools
+ - covr
+ - roxygen2
+ - testthat
+ - rmarkdown
+ - knitr
+  - tibble
+ - dplyr
+ - data.table
+ - utils
+ - rprojroot
+ - reticulate
