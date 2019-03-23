@@ -1,3 +1,12 @@
+# rEcl 0.1.7
+* resubmitting to CRAN after removing dot.
+* remove dot from name Alfonso
+
+
+# rEcl 0.1.6
+* resubmitting to CRAN after changing Author to Authors@
+* tested with winbuilder. no errors
+
 # rEcl 0.1.5
 * resubmitting to CRAN after enclosing couple of names in single quotes.
 * tested with winbuilder
