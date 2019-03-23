@@ -17,7 +17,7 @@ r_packages:
  - testthat
  - rmarkdown
  - knitr
-  - tibble
+ - tibble
  - dplyr
  - data.table
  - utils
