@@ -10,11 +10,12 @@ r_check_args: --as-cran
 git:
   depth: 5
 
+
 r_packages:
  - devtools
  - covr
  - roxygen2
- * tidyverse
+ - tidyverse
  - testthat
  - rmarkdown
  - knitr
@@ -25,8 +26,10 @@ r_packages:
  - rprojroot
  - reticulate
 
+
 before_script:
  - R -e "devtools::document()"
 
 after_success:
   - Rscript -e "covr::codecov()"
+
