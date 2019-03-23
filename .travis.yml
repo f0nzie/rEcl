@@ -21,9 +21,6 @@ r_packages:
  - reticulate
 
 
-before_script:
- - R -e "devtools::document()"
-
 after_success:
   - Rscript -e "covr::codecov()"
 
