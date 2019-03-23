@@ -15,14 +15,10 @@ r_packages:
  - devtools
  - covr
  - roxygen2
- - tidyverse
- - testthat
+ - rprojroot
  - rmarkdown
  - knitr
- - tibble
- - dplyr
- - data.table
- - rprojroot
+ - tidyverse
  - reticulate
 
 
