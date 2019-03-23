@@ -1,6 +1,7 @@
-language: R
-sudo: false
+language: r
+r:
+ - 3.5.3
 cache: packages
-
-after_success:
-  - Rscript -e 'covr::codecov()'
+sudo: false
+warnings_are_errors: true
+r_check_args: --as-cran
