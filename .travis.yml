@@ -23,3 +23,9 @@ r_packages:
  - utils
  - rprojroot
  - reticulate
+
+before_script:
+ - R -e "devtools::document()"
+
+after_success:
+  - Rscript -e "covr::codecov()"
