@@ -22,7 +22,6 @@ r_packages:
  - tibble
  - dplyr
  - data.table
- - utils
  - rprojroot
  - reticulate
 
