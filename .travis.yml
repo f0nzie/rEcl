@@ -1,11 +1,13 @@
 language: r
-r:
- - 3.5.2
 cache: packages
 sudo: false
 warnings_are_errors: true
 r_check_args: --as-cran
 
+r:
+ - oldrel
+ - release
+ - devel
 
 git:
   depth: 5
@@ -22,10 +24,6 @@ r_packages:
  - htmltools
  - yaml
  - compiler
-
-
-install:
- - Rscript -e 'install.packages("devtools", , version = "1.9.1", repos = "http://cran.rstudio.com")'
 
 
 
