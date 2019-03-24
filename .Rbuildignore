@@ -1,3 +1,4 @@
+^\.travis\.yml$
 ^README\.Rmd$
 ^.*\.Rproj$
 ^\.Rproj\.user$
@@ -8,4 +9,3 @@ inst/python/tests
 inst/python/volve
 inst/python/.idea
 ^.*\.log$
-
