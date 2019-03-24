@@ -1,5 +1,6 @@
 # rEcl 0.1.8
 * resubmitting to CRAN after reviewing warnings.
+* recreate author and maintainer.
 
 # rEcl 0.1.7
 * resubmitting to CRAN after removing dot.
