@@ -1,55 +1,43 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: R
-sudo: true
-cache: packages
+language: r
+pandoc_version: 1.18
 
-os:
-  - linux
-  #- os: osx
-    #osx_image: xcode10.1
-    #disable_homebrew: true
-    #r_build_args: '--no-build-vignettes'
-    #r_check_args: '--ignore-vignettes --no-examples'
+sudo: required
+cache: packages
 
 addons:
   apt:
-    #sources:
-    #  - ubuntu-toolchain-r-test
     packages:
-      - libpython-dev
-      - libpython3-dev
-      - texlive-full
-      - cmake
-      - python3
-  #homebrew:
-    #packages:
-      #- libpython-dev
-      #- libpython3-dev
-      #- texlive-full
-      #- cmake
-      #- python3
-    #update: true
-
-r:
-  - release
-  - devel
-
-r-packages:
-  - reticulate
-
-env:
-  global:
-    - R_CHECK_ARGS="--no-build-vignettes --no-manual --ignore-vignettes --no-examples"
-    - R_BUILD_ARGS="--no-build-vignettes"
-
-python:
-  - "3.5"
-  - "3.6"
-  - "3.7"
+      - python3        # uncomment this to use python3
 
 before_install:
-  - pip install --user numpy
-  - pip install --user pandas
+  - sudo apt-get install r-base-dev
+  - tlmgr install index
+  #------------------------------------- uncomment these lines to use python3
+  - sudo apt-get install python3-pip
+  - sudo pip3 install --upgrade pip
+  - sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2
+  - sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 3
+  - sudo apt-get install python3-tk
+  - sudo -H pip3 install shap --ignore-installed six
+  #-------------------------------------
+  - sudo apt-get update
+  - ls /usr/local/lib/python3.4/dist-packages
+  - ls /usr/local/lib/python3.4/dist-packages/shap
+  - export PATH=$(which python$R_PYTHON_VERSION):$PATH
+  - export PYTHON=$(which python$R_PYTHON_VERSION)
+  - export PYTHONPATH=$(which python$R_PYTHON_VERSION):$PYTHONPATH
+  - export RETICULATE_PYTHON=$PYTHON
+  - R_PATH="PATH=$PATH" | echo $R_PATH >  ~/.Renviron
+  - R_RETICULATE_PYTHON="RETICULATE_PYTHON=$PYTHON" | echo $R_RETICULATE_PYTHON >>  ~/.Renviron
+  - sudo $PYTHON -m pip install shap --ignore-installed six
 
-warnings_are_errors: false
+r_packages:
+  - reticulate
+
+notifications:
+  email: false
+
+after_success:
+  - Rscript -e 'covr::codecov()'
