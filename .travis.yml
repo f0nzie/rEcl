@@ -24,8 +24,6 @@ before_install:
   - sudo -H pip3 install pandas
   #-------------------------------------
   - sudo apt-get update
-  - ls /usr/local/lib/python3.6/dist-packages
-  - ls /usr/local/lib/python3.6/dist-packages/shap
   - export PATH=$(which python$R_PYTHON_VERSION):$PATH
   - export PYTHON=$(which python$R_PYTHON_VERSION)
   - export PYTHONPATH=$(which python$R_PYTHON_VERSION):$PYTHONPATH
