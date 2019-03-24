@@ -12,13 +12,13 @@ git:
 
 
 r_packages:
+ - reticulate
  - tidyverse
  - covr
  - roxygen2
  - rprojroot
  - rmarkdown
  - knitr
- - reticulate
  - htmltools
  - yaml
  - compiler
