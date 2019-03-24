@@ -1,3 +1,6 @@
+# rEcl 0.1.8
+* resubmitting to CRAN after reviewing warnings.
+
 # rEcl 0.1.7
 * resubmitting to CRAN after removing dot.
 * remove dot from name Alfonso
