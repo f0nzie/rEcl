@@ -77,14 +77,15 @@ library(reticulate)
 
 reticulate::use_condaenv("pyres", required = TRUE)
 reticulate::py_config()
-#> python:         /home/superuser/anaconda3/envs/pyres/bin/python
-#> libpython:      /home/superuser/anaconda3/envs/pyres/lib/libpython3.6m.so
-#> pythonhome:     /home/superuser/anaconda3/envs/pyres:/home/superuser/anaconda3/envs/pyres
-#> version:        3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
-#> numpy:          /home/superuser/anaconda3/envs/pyres/lib/python3.6/site-packages/numpy
+#> python:         C:\Users\msfz751\Anaconda3\envs\pyres\python.exe
+#> libpython:      C:/Users/msfz751/Anaconda3/envs/pyres/python36.dll
+#> pythonhome:     C:\Users\msfz751\ANACON~1\envs\pyres
+#> version:        3.6.8 |Anaconda, Inc.| (default, Feb 21 2019, 18:30:04) [MSC v.1916 64 bit (AMD64)]
+#> Architecture:   64bit
+#> numpy:          C:\Users\msfz751\ANACON~1\envs\pyres\lib\site-packages\numpy
 #> numpy_version:  1.16.2
 #> 
-#> NOTE: Python version was forced by RETICULATE_PYTHON
+#> NOTE: Python version was forced by use_python function
 ```
 
 ``` r
@@ -92,7 +93,7 @@ library(rEcl)
 
 ecl_folder <- system.file("rawdata", package = "rEcl")
 ecl_folder
-#> [1] "/home/superuser/R/x86_64-pc-linux-gnu-library/3.5/rEcl/rawdata"
+#> [1] "C:/Users/msfz751/Documents/R/win-library/3.5/rEcl/rawdata"
 unsmry_file <- file.path(ecl_folder, "spe6", "SPE6_FRAC.UNSMRY")
 file.exists(unsmry_file)
 #> [1] TRUE
@@ -318,14 +319,15 @@ library(reticulate)
 
 reticulate::use_condaenv("pyres", required = TRUE)
 reticulate::py_config()
-#> python:         /home/superuser/anaconda3/envs/pyres/bin/python
-#> libpython:      /home/superuser/anaconda3/envs/pyres/lib/libpython3.6m.so
-#> pythonhome:     /home/superuser/anaconda3/envs/pyres:/home/superuser/anaconda3/envs/pyres
-#> version:        3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
-#> numpy:          /home/superuser/anaconda3/envs/pyres/lib/python3.6/site-packages/numpy
+#> python:         C:\Users\msfz751\Anaconda3\envs\pyres\python.exe
+#> libpython:      C:/Users/msfz751/Anaconda3/envs/pyres/python36.dll
+#> pythonhome:     C:\Users\msfz751\ANACON~1\envs\pyres
+#> version:        3.6.8 |Anaconda, Inc.| (default, Feb 21 2019, 18:30:04) [MSC v.1916 64 bit (AMD64)]
+#> Architecture:   64bit
+#> numpy:          C:\Users\msfz751\ANACON~1\envs\pyres\lib\site-packages\numpy
 #> numpy_version:  1.16.2
 #> 
-#> NOTE: Python version was forced by RETICULATE_PYTHON
+#> NOTE: Python version was forced by use_python function
 ```
 
 ``` r
@@ -341,9 +343,7 @@ file.exists(unsmry_file)
 # connect to Python and start a class instance
 py <- restools_connect()
 parser <- EclBinaryParser(py, unsmry_file)
-```
 
-``` r
 # dimensions of the reservoir model
 get_dimensions(parser)
 #> DIMENS(ni=19, nj=28, nk=5)
@@ -757,5 +757,5 @@ tibble::as_tibble(get_vector_column(parser, "WBHP"))
 #>  8  217.
 #>  9  216.
 #> 10  215.
-#> # … with 1,064 more rows
+#> # ... with 1,064 more rows
 ```

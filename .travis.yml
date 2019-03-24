@@ -1,5 +1,33 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
-language: R
-sudo: false
+language: r
+r:
+ - 3.5.2
 cache: packages
+sudo: false
+warnings_are_errors: true
+r_check_args: --as-cran
+
+
+git:
+  depth: 5
+
+
+r_packages:
+ - devtools
+ - tidyverse
+ - covr
+ - roxygen2
+ - rprojroot
+ - rmarkdown
+ - knitr
+ - reticulate
+ - htmltools
+ - yaml
+ - compiler
+
+
+# install:
+#  - Rscript -e 'install.packages("devtools", repos = "http://cran.rstudio.com")'
+
+after_success:
+  - Rscript -e "covr::codecov()"
+

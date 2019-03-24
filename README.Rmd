@@ -171,13 +171,12 @@ file.exists(unsmry_file)
 # connect to Python and start a class instance
 py <- restools_connect()
 parser <- EclBinaryParser(py, unsmry_file)
-```
 
-
-```{r}
 # dimensions of the reservoir model
 get_dimensions(parser)
 ```
+
+
 
 ```{r}
 # reading the Eclipse vectors. this may take few seconds id the reservoir is too complex
@@ -210,4 +209,5 @@ Eclipse vectors that are different in nature, such as well (start with __W__) va
 # read a well variable
 tibble::as_tibble(get_vector_column(parser, "WBHP"))
 ```
+
 
