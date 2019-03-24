@@ -1,32 +1,58 @@
-language: r
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: true
 cache: packages
-sudo: false
-warnings_are_errors: true
-r_check_args: --as-cran
+
+os:
+  - linux
+  #- os: osx
+    #osx_image: xcode10.1
+    #disable_homebrew: true
+    #r_build_args: '--no-build-vignettes'
+    #r_check_args: '--ignore-vignettes --no-examples'
+
+addons:
+  apt:
+    #sources:
+    #  - ubuntu-toolchain-r-test
+    packages:
+      - libpython-dev
+      - libpython3-dev
+      - texlive-full
+      - cmake
+      - python3
+  #homebrew:
+    #packages:
+      #- libpython-dev
+      #- libpython3-dev
+      #- texlive-full
+      #- cmake
+      #- python3
+    #update: true
 
 r:
- - oldrel
- - release
- - devel
+  - release
+  - devel
 
-git:
-  depth: 5
+r-packages:
+  - reticulate
 
+env:
+  global:
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual --ignore-vignettes --no-examples"
+    - R_BUILD_ARGS="--no-build-vignettes"
 
-r_packages:
- - reticulate
- - tidyverse
- - covr
- - roxygen2
- - rprojroot
- - rmarkdown
- - knitr
- - htmltools
- - yaml
- - compiler
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
 
+before_install:
+  - chmod +x travis_setup.sh
+  - ./travis_setup.sh
+  - pip install --user igraph
+  - pip install --user numpy
+  - pip install --user pandas
 
-
-after_success:
-  - Rscript -e "covr::codecov()"
-
+warnings_are_errors: false
