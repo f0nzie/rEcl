@@ -1,11 +1,15 @@
+^NEWS\.md$
+^inst/python$
+^\.git$
+^\.Rproj\.user$
 ^\.travis\.yml$
+^\.gitignore$
+^\.Rhistory$
+
+^.*\.log$
 ^README\.Rmd$
+
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
-notebooks
-inst/python/venv
-inst/python/tests
 inst/python/volve
-inst/python/.idea
-^.*\.log$
