@@ -49,9 +49,6 @@ python:
   - "3.7"
 
 before_install:
-  - chmod +x travis_setup.sh
-  - ./travis_setup.sh
-  - pip install --user igraph
   - pip install --user numpy
   - pip install --user pandas
 
