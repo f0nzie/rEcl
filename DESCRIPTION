@@ -15,6 +15,6 @@ License: GPL-2
 LazyData: true
 Imports: reticulate
 Depends:
-    R (>= 3.4)   
+    R (>= 3.4)
 RoxygenNote: 6.1.1
 Encoding: UTF-8
