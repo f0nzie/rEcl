@@ -26,8 +26,9 @@ check_restools_present <- function() {
 }
 
 
-#' Connect to Python and the package restools
-#'
+#' @title Connect to Python and the package restools
+#' @description Connect R to Python through by checking the Pyhton version first
+#' and verifying that Python package restools is present
 #' @export
 #' @examples
 #' \dontrun{
@@ -51,7 +52,7 @@ restools_connect <- function (){
 
 #' Call to Python class to convert Eclipse binary files
 #'
-#' Uses a Python package under restools to make the convertion from Eclipse
+#' Uses a Python package under restools to make the conversion from Eclipse
 #' binary files to dataframes
 #'
 #' @param o object
