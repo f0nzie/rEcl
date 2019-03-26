@@ -1,43 +1,10 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: r
-pandoc_version: 1.18
-
-sudo: required
+language: R
 cache: packages
+sudo: false
 
-addons:
-  apt:
-    packages:
-      - python3        # uncomment this to use python3
 
-before_install:
-  - sudo apt-get install r-base-dev
-  - tlmgr install index
-  #------------------------------------- uncomment these lines to use python3
-  - sudo apt-get install python3-pip
-  - sudo pip3 install --upgrade pip
-  - sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2
-  - sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 3
-  - sudo apt-get install python3-tk
-  - sudo -H pip3 install numpy
-  - sudo -H pip3 install pandas
-  #-------------------------------------
-  - sudo apt-get update
-  - export PATH=$(which python$R_PYTHON_VERSION):$PATH
-  - export PYTHON=$(which python$R_PYTHON_VERSION)
-  - export PYTHONPATH=$(which python$R_PYTHON_VERSION):$PYTHONPATH
-  - export RETICULATE_PYTHON=$PYTHON
-  - R_PATH="PATH=$PATH" | echo $R_PATH >  ~/.Renviron
-  - R_RETICULATE_PYTHON="RETICULATE_PYTHON=$PYTHON" | echo $R_RETICULATE_PYTHON >>  ~/.Renviron
-  # - sudo $PYTHON -m pip install shap --ignore-installed six
-
-r_packages:
-  - reticulate
-  - tidyverse
-
-notifications:
-  email: false
 
 after_success:
   - Rscript -e 'covr::codecov()'
