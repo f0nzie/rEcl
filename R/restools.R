@@ -50,8 +50,9 @@ restools_connect <- function (){
 }
 
 
-#' Call to Python class to convert Eclipse binary files
-#'
+#' @title Call to Python class to convert Eclipse binary files
+#' @description This is the main function that starts the conversion from binary
+#' to R dataframes.
 #' Uses a Python package under restools to make the conversion from Eclipse
 #' binary files to dataframes
 #'
