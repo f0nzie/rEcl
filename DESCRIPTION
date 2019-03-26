@@ -14,6 +14,9 @@ Description: An R wrapper of the class 'EclBinaryParser' written in 'Python'
 License: GPL-2
 LazyData: true
 Imports: reticulate
+Suggests: knitr,
+    rmarkdown,
+    covr
 Depends:
     R (>= 3.4)
 RoxygenNote: 6.1.1
