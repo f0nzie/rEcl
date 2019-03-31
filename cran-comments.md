@@ -5,6 +5,7 @@
     Possibly mis-spelled words in DESCRIPTION:
     Konstantin (13:8)
     Sermyagin (13:19)
+* .travis.yaml. Ubuntu 14.05.4 LTS Trusty     Done. Your build exited with 0.
 
 * This is a new release.
 
