@@ -1,3 +1,4 @@
+^cran-comments\.md$
 ^inst/python/volve$
 ^NEWS\.md$
 ^inst/python$
@@ -10,4 +11,3 @@
 ^.*\.log$
 ^README\.Rmd$
 ^.*\.Rproj$
-
