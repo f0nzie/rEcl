@@ -1,11 +1,10 @@
-## Test environments
-* local OS X install, R 3.5.3
-* ubuntu 14.04 (on travis-ci), R 3.5.3
-* win-builder (devel and release)
-
-## R CMD check results
-
-0 errors | 0 warnings | 1 note
+## Test environments for rEcl 0.1.9
+* local Windows 10 64-bit, R 3.5.3       0 errors v | 0 warnings v | 0 notes v
+* Debian 9, R 3.5.3                      0 errors v | 0 warnings v | 0 notes v
+* win-builder (devel and release)        Status: 1 NOTE
+    Possibly mis-spelled words in DESCRIPTION:
+    Konstantin (13:8)
+    Sermyagin (13:19)
 
 * This is a new release.
 
@@ -24,9 +23,9 @@ write names as they are.
 > I read in the CRAN tutorial to use \dontrun{} for the cases where the
 > developer is including an external library or software.
 
-Well, python is probably installed oon all check machines, ehnce it 
+Well, python is probably installed oon all check machines, hence it 
 would be good to use these in the checks.
-Nevertheless, you have to declare in the SystemRequirements field that 
+Nevertheless, you have to declare in the `SystemRequirements` field that 
 Python is needed.
 Please fix and resubmit.
 Best,
