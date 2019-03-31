@@ -1,3 +1,7 @@
+# rECl 0.1.9
+* add SystemRequirements: 'python3' to DESCRIPTION
+
+
 # rEcl 0.1.8
 * resubmitting to CRAN after reviewing warnings.
 * recreate author and maintainer.

@@ -1,7 +1,7 @@
 Package: rEcl
 Type: Package
 Title: Convert Reservoir Simulation Output Binary Files from 'Eclipse' to Dataframes
-Version: 0.1.8
+Version: 0.1.9
 Authors@R: c(person("Alfonso", "Reyes", role = c("aut", "cre"),
                      email = "Alfonso.Reyes@oilgainsanalytics.com"),
               person("Konstantin", "Sermyagin", role = "aut", email = "kvs@readas.net"))
