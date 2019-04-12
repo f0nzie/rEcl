@@ -50,7 +50,7 @@ print(a)
 ```
 
 ```{r}
-source_python("../python/pyres/binary_parser.py")
+source_python("../python/restools/binary_parser.py")
 ```
 
 ```{r}
