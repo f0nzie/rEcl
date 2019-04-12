@@ -1,3 +1,7 @@
+# rECl 0.1.10
+* add Volve binaries. Now it is a little over 100 MB
+* add instructions to install from Github
+
 # rECl 0.1.9
 * add SystemRequirements: 'python3' to DESCRIPTION
 
