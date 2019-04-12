@@ -25,6 +25,16 @@ Once is completed it will be submitted to CRAN. You can install it in the meanti
 * cloning or downloading the package from Github
 * install it using `devtools::install_github("f0nzie/rEcl", ref = "the_branch")`, where the branch could be `master` or `develop`, depending how newer or bleeding edge you like it.
 
+## Python `restools` 
+The binary parser classes and functions do not have yet a Python package; the whole Python code for `restools` is living under this `rEcl` R package under the folder `python`:
+
+```{r}
+# list files under the restools Python package
+restools_dir <- system.file("python", "restools", package = "rEcl")
+list.files(restools_dir, recursive = TRUE)
+```
+
+The package, modules, classes and functions are called directly from R.
 
 ## Requirements
 
@@ -59,11 +69,11 @@ You can find a copy of these files in this repository under [rEcl/inst/python/vo
 
 
 ### New functions
+On top of the class `EclBinaryParser` writtent by Konstantin Sermyagin, I have added a few utility functions:
 
 * `get_vectors_shape`: get the shape or dimensions of the vectors dataframe
 * `get_vector_names`: get the names of all the vectors
 * `get_vector_column`: get the values for a vector-column
-
 
 
 ## Examples

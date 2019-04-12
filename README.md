@@ -20,6 +20,29 @@ the meantime by two methods:
     "the_branch")`, where the branch could be `master` or `develop`,
     depending how newer or bleeding edge you like it.
 
+## Python `restools`
+
+The binary parser classes and functions do not have yet a Python
+package; the whole Python code for `restools` is living under this
+`rEcl` R package under the folder `python`:
+
+``` r
+# list files under the restools Python package
+restools_dir <- system.file("python", "restools", package = "rEcl")
+list.files(restools_dir, recursive = TRUE)
+#> [1] "__init__.py"                                    
+#> [2] "__pycache__/__init__.cpython-36.pyc"            
+#> [3] "__pycache__/binary_parser.cpython-36.pyc"       
+#> [4] "binary_parser.py"                               
+#> [5] "postprocess/__init__.py"                        
+#> [6] "postprocess/__pycache__/__init__.cpython-36.pyc"
+#> [7] "postprocess/dynamic_mnemonics.py"               
+#> [8] "postprocess/ecl_vectors.py"                     
+#> [9] "postprocess/static_mnemonics.py"
+```
+
+The package, modules, classes and functions are called directly from R.
+
 ## Requirements
 
   - R 3.5.3
@@ -59,6 +82,9 @@ too big for an R package.
 
 ### New functions
 
+On top of the class `EclBinaryParser` writtent by Konstantin Sermyagin,
+I have added a few utility functions:
+
   - `get_vectors_shape`: get the shape or dimensions of the vectors
     dataframe
   - `get_vector_names`: get the names of all the vectors
@@ -77,12 +103,11 @@ library(reticulate)
 
 reticulate::use_condaenv("pyres", required = TRUE)
 reticulate::py_config()
-#> python:         C:\Users\msfz751\Anaconda3\envs\pyres\python.exe
-#> libpython:      C:/Users/msfz751/Anaconda3/envs/pyres/python36.dll
-#> pythonhome:     C:\Users\msfz751\ANACON~1\envs\pyres
-#> version:        3.6.8 |Anaconda, Inc.| (default, Feb 21 2019, 18:30:04) [MSC v.1916 64 bit (AMD64)]
-#> Architecture:   64bit
-#> numpy:          C:\Users\msfz751\ANACON~1\envs\pyres\lib\site-packages\numpy
+#> python:         /home/dspe/anaconda3/envs/pyres/bin/python
+#> libpython:      /home/dspe/anaconda3/envs/pyres/lib/libpython3.6m.so
+#> pythonhome:     /home/dspe/anaconda3/envs/pyres:/home/dspe/anaconda3/envs/pyres
+#> version:        3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
+#> numpy:          /home/dspe/anaconda3/envs/pyres/lib/python3.6/site-packages/numpy
 #> numpy_version:  1.16.2
 #> 
 #> NOTE: Python version was forced by use_python function
@@ -93,7 +118,7 @@ library(rEcl)
 
 ecl_folder <- system.file("rawdata", package = "rEcl")
 ecl_folder
-#> [1] "C:/Users/msfz751/Documents/R/win-library/3.5/rEcl/rawdata"
+#> [1] "/home/dspe/R/x86_64-pc-linux-gnu-library/3.5/rEcl/rawdata"
 unsmry_file <- file.path(ecl_folder, "spe6", "SPE6_FRAC.UNSMRY")
 file.exists(unsmry_file)
 #> [1] TRUE
@@ -319,12 +344,11 @@ library(reticulate)
 
 reticulate::use_condaenv("pyres", required = TRUE)
 reticulate::py_config()
-#> python:         C:\Users\msfz751\Anaconda3\envs\pyres\python.exe
-#> libpython:      C:/Users/msfz751/Anaconda3/envs/pyres/python36.dll
-#> pythonhome:     C:\Users\msfz751\ANACON~1\envs\pyres
-#> version:        3.6.8 |Anaconda, Inc.| (default, Feb 21 2019, 18:30:04) [MSC v.1916 64 bit (AMD64)]
-#> Architecture:   64bit
-#> numpy:          C:\Users\msfz751\ANACON~1\envs\pyres\lib\site-packages\numpy
+#> python:         /home/dspe/anaconda3/envs/pyres/bin/python
+#> libpython:      /home/dspe/anaconda3/envs/pyres/lib/libpython3.6m.so
+#> pythonhome:     /home/dspe/anaconda3/envs/pyres:/home/dspe/anaconda3/envs/pyres
+#> version:        3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
+#> numpy:          /home/dspe/anaconda3/envs/pyres/lib/python3.6/site-packages/numpy
 #> numpy_version:  1.16.2
 #> 
 #> NOTE: Python version was forced by use_python function
@@ -757,5 +781,5 @@ tibble::as_tibble(get_vector_column(parser, "WBHP"))
 #>  8  217.
 #>  9  216.
 #> 10  215.
-#> # ... with 1,064 more rows
+#> # … with 1,064 more rows
 ```
