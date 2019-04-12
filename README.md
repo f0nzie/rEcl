@@ -63,6 +63,20 @@ The package, modules, classes and functions are called directly from R.
 For testing `rEcl` and `EclBinaryParser` I used the output binary files
 from the reservoir simulation of the Volve field.
 
+``` r
+eclipse_bin_dir <- system.file("rawdata", package = "rEcl")
+list.files(eclipse_bin_dir, recursive = TRUE)
+#>  [1] "PUNQS3/PUNQS3.INIT"      "PUNQS3/PUNQS3.INSPEC"   
+#>  [3] "PUNQS3/PUNQS3.RSSPEC"    "PUNQS3/PUNQS3.SMSPEC"   
+#>  [5] "PUNQS3/PUNQS3.UNRST"     "PUNQS3/PUNQS3.UNSMRY"   
+#>  [7] "spe6/SPE6_FRAC.INIT"     "spe6/SPE6_FRAC.RSSPEC"  
+#>  [9] "spe6/SPE6_FRAC.SMSPEC"   "spe6/SPE6_FRAC.UNRST"   
+#> [11] "spe6/SPE6_FRAC.UNSMRY"   "volve/VOLVE_2016.h5"    
+#> [13] "volve/VOLVE_2016.INIT"   "volve/VOLVE_2016.INSPEC"
+#> [15] "volve/VOLVE_2016.RSSPEC" "volve/VOLVE_2016.SMSPEC"
+#> [17] "volve/VOLVE_2016.UNSMRY"
+```
+
     VOLVE_2016.INIT
     VOLVE_2016.RSSPEC
     VOLVE_2016.SMSPEC

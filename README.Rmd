@@ -53,6 +53,12 @@ The package, modules, classes and functions are called directly from R.
 ## Files used for testing
 For testing `rEcl` and `EclBinaryParser` I used the output binary files from the reservoir simulation of the Volve field.
 
+```{r}
+eclipse_bin_dir <- system.file("rawdata", package = "rEcl")
+list.files(eclipse_bin_dir, recursive = TRUE)
+```
+
+
 ```
 VOLVE_2016.INIT
 VOLVE_2016.RSSPEC
